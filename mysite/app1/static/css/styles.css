@@ -1,0 +1,31 @@
+
+html { height: 100%; }
+body {
+    height:100%;
+    min-height: 100%;
+    background: #000000;
+    color: #FFFFFF;
+    position:relative;
+}
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 20px;
+    list-style: none;
+	background-color: tan;
+}
+
+
+/* LIST #1 */
+#list1 {
+
+}
+#list1 ul { list-style:none; text-align:center; border-top:1px solid #eee; border-bottom:1px solid #eee; padding:10px 0; height:75px; }
+#list1 ul li { display:inline; text-transform:uppercase; padding:0 20px; letter-spacing:10px; }
+#list1 ul li a { text-decoration:none; color:#eee; }
+#list1 ul li a:hover { text-decoration:underline; }
+
+
+
+
+

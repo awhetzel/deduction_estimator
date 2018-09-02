@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Employee List</h1>
+  {% if employee_list %}
+  <ul>
+    {% for employee in employee_list %}
+      <li>
+        <a href="{{ employee.get_absolute_url }}">{{ employee.first_name }}</a> ({{employee.last_name}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no Employees in the database.</p>
+  {% endif %}
+	<br></br>
+
+	<a href="{% url 'add_new' %}">Click here to add a new employee</a>
+
+
+
+{% endblock %}
+
