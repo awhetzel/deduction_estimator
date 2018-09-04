@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<form method="post" action="{% url 'results' %}">
+    {% csrf_token %}
+
+
+
+    {{ calc_form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

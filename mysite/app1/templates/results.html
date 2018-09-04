@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Estimated Values For Employee:</h1>
+
+<h3> Salary: {{ salary }}</h3>
+<h3> Dependents: {{ dep }}</h3>
+<h3> Deduction Amount: {{deduction}}</h3>
+<h3> Salary After Deduction: {{ after_deduction }} </h3>
+
+{% endblock %}

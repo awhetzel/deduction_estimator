@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views import generic
 from .models import Employee
 from django.shortcuts import get_object_or_404
-
+from .forms import CalcForm
 
 def index(request):
     # Number of visits to this view, as counted in the session variable.
@@ -26,6 +26,38 @@ def login(request):
 def add_new(request):
     return render(request, 'add_new.html')
 
+#def calculate(request):
+#    return render(request, 'calculate.html')
+
+def calculate(request):
+    calc_form = CalcForm()
+
+    return render(request, 'calculate.html', {'calc_form': calc_form})
+
+def results(request):
+
+    salary = float(request.POST['emp_salary'])
+
+    dep = request.POST['dependents']
+
+
+    deduction = 1000+(500* int(dep))
+
+    after_deduction = float(salary)-deduction
+
+
+
+    context = {
+        'salary': '${:,.2f}'.format(salary),
+        'dep': dep,
+        'deduction': '${:,.2f}'.format(deduction),
+        'after_deduction': '${:,.2f}'.format(after_deduction),
+    }
+
+
+
+    return render(request, 'results.html', context)
+
 
 #new stuff
 
@@ -42,5 +74,5 @@ class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = Employee
-    
+
 
