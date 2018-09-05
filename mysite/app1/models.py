@@ -18,6 +18,7 @@ class Company(models.Model):
 
 class Employee(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     salary = models.DecimalField(max_digits=9, decimal_places=2)
