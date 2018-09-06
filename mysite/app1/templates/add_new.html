@@ -2,6 +2,16 @@
 
 {% block content %}
 
-<h1>Put form here to add new employee</h1>
+<h1>Add New Employee</h1>
+
+<form method="post" action="{% url 'added' %}">
+    {% csrf_token %}
+	{{ employee_form }}
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
 
 {% endblock %}

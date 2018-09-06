@@ -1,4 +1,5 @@
 from django import forms
+from .models import Company
 
 class CalcForm(forms.Form):
     emp_salary = forms.DecimalField(label='Salary')

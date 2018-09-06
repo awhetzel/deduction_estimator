@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
-from .models import Employee, Company
+from .models import Employee, Company, EmployeeForm
 from django.shortcuts import get_object_or_404
-from .forms import CalcForm
+from .forms import CalcForm #, EmployeeForm
 
 
 #main page: demonstrates basic use of session variables
@@ -24,10 +24,21 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-#Just a stub for a function to allow employers
-#to add new employees
+#allow employers to add new employees
 def add_new(request):
-    return render(request, 'add_new.html')
+    #if POST request, process input
+    if request.method == 'POST':
+        print('METHOD WAS POST IN ADD_NEW VIEW')
+        employee_form = EmployeeForm(request.POST)
+        #validate form input
+        if employee_form.is_valid():
+            #TODO put stuff in DB here
+            new_employee = employee_form.save()
+            return render(request, 'added.html')
+    #create blank form
+    else:
+        employee_form = EmployeeForm()
+        return render(request, 'add_new.html', {'employee_form': employee_form})
 
 #Deduction calculator form page
 def calculate(request):

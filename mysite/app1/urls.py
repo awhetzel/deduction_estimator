@@ -11,4 +11,5 @@ urlpatterns = [
     #path('calculate/', views.calculate, name='calculate'),
     path('calculate/', views.calculate, name='calculate'),
     path('results/', views.results, name='results'),
+    path('added/', views.add_new, name='added'),
 ]
