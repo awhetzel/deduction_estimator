@@ -3,5 +3,10 @@
 
 {% block content %}
 <h3> Employee added succesfully! </h3>
+
+<form action="{% url 'dependents' %}">
+  <button type="submit" class="btn btn-xl" style=" border-color: rgb(2,132,69); background-color: rgb(2,132,69); color: rgb(246,246,247); font-family: Verdana;font-size: large">Add Dependents</button>
+</form>
+
 {% endblock %}
 

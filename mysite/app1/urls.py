@@ -12,4 +12,7 @@ urlpatterns = [
     path('calculate/', views.calculate, name='calculate'),
     path('results/', views.results, name='results'),
     path('added/', views.add_new, name='added'),
+    path('dependents/', views.add_dependents, name='dependents')
+
+
 ]

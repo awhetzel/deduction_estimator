@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+
+<form method="post" action="" class="pure-form pure-form-aligned">
+    {% csrf_token %}
+
+	{{ formset }}
+	<input type="submit" value="Submit">
+
+</form>
+
+{% endblock %}
+

@@ -1,5 +1,6 @@
 from django import forms
-from .models import Company
+from .models import Company, Employee, Dependent
+from django.forms.models import modelformset_factory
 
 class CalcForm(forms.Form):
     emp_salary = forms.DecimalField(label='Salary')
@@ -7,5 +8,9 @@ class CalcForm(forms.Form):
     dependents = forms.IntegerField(label='Dependents')
     per_dependent = forms.DecimalField(label='Deduction/Dependent')
     discount = forms.DecimalField(label='Discount Percentage')
+
+
+DependentFormSet = modelformset_factory(Dependent, exclude=())
+
 
 

@@ -1,9 +1,10 @@
 {% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<form method="post" action="{% url 'results' %}">
+<form method="post" class="pure-form pure-form-aligned" action="{% url 'results' %}">
     {% csrf_token %}
-	{{ calc_form }}
+	{{ calc_form|crispy }}
     <input type="submit" value="Submit">
 </form>
 

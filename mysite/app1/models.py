@@ -29,11 +29,15 @@ class Employee(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this employee."""
         return reverse('employee-detail', args=[str(self.id)])
+
+
 #TODO put this in forms.py
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ['first_name', 'last_name', 'salary', 'company','dependents']
+
+
 
 class Dependent(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)

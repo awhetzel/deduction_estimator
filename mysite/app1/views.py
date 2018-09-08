@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views import generic
 from .models import Employee, Company, EmployeeForm
 from django.shortcuts import get_object_or_404
-from .forms import CalcForm #, EmployeeForm
+from .forms import CalcForm , DependentFormSet
 
 
 #main page: demonstrates basic use of session variables
@@ -40,10 +40,26 @@ def add_new(request):
         employee_form = EmployeeForm()
         return render(request, 'add_new.html', {'employee_form': employee_form})
 
+
+def add_dependents(request):
+    if request.method == 'POST':
+        formset = DependentFormSet(data=request.POST)
+        if formset.is_valid():
+            #TODO save dependent data
+            return render(request, 'dependents.html', {'formset': formset})
+    else:
+        formset = DependentFormSet()
+        return render(request, 'dependents.html', {'formset': formset})
+
+
+
 #Deduction calculator form page
 def calculate(request):
     calc_form = CalcForm()
     return render(request, 'calculate.html', {'calc_form': calc_form})
+
+
+
 
 #Deduction calculator logic, redirects to results page
 def results(request):
