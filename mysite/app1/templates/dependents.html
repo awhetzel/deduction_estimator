@@ -1,15 +1,60 @@
 {% extends "base_generic.html" %}
-
-
 {% block content %}
+{% load crispy_forms_tags %}
 
-<form method="post" action="" class="pure-form pure-form-aligned">
+<!-- <form method="post" action="" class="pure-form pure-form-aligned">
     {% csrf_token %}
 
 	{{ formset }}
 	<input type="submit" value="Submit">
+</form> -->
 
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
+<script type="text/html" id="dependent-template">
+<div id="dependent-__prefix__">
+	{{ formset.empty_form }}
+</div>
+</script>
+
+<form action="" method="post" class="pure-form pure-form-aligned">
+{% csrf_token %}
+{{ formset.management_form }}
+<div id="dependent-form-container">
+    {% for form in formset %}
+        <div id="formset-{{ forloop.counter0 }}">
+            {{ form.id }}
+            {{ form.as_p }}
+		</div>
+    {% endfor %}
+</div>
+<a href="#" id="add-dependent-button" class="btn btn-info add-dependent">Add Dependent</a>
 </form>
+
+
+<script>
+$(document).ready(function() {
+    $('.add-dependent').click(function(ev) {
+        ev.preventDefault();
+        var count = $('#dependent-form-container').children().length;
+        var tmplMarkup = $('#dependent-template').html();
+        var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+        $('div#dependent-form-container').append(compiledTmpl);
+
+        // update form count
+        $('#id_dependent_dependent-TOTAL_FORMS').attr('value', count+1);
+
+        // some animate to scroll to view our new form
+        $('html, body').animate({
+                scrollTop: $("#add-dependent-button").position().top-200
+            }, 800);
+    });
+});
+</script>
+
 
 {% endblock %}
 

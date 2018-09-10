@@ -10,7 +10,9 @@ class CalcForm(forms.Form):
     discount = forms.CharField(label='Discount Percentage')
 
 
-DependentFormSet = modelformset_factory(Dependent, exclude=())
+
+
+#DependentFormSet = modelformset_factory(Dependent, exclude=(), extra=1)
 
 
 

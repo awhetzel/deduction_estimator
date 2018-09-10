@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
-from .models import Employee, Company, EmployeeForm
+from .models import Employee, Company, EmployeeForm, Dependent
 from django.shortcuts import get_object_or_404
-from .forms import CalcForm , DependentFormSet
+from .forms import CalcForm #, DependentFormSet
+from django.forms.models import modelformset_factory
 
 
 #main page: demonstrates basic use of session variables
@@ -42,8 +43,13 @@ def add_new(request):
 
 
 def add_dependents(request):
+    DependentFormSet = modelformset_factory(Dependent, exclude=(), extra=1)
+
     if request.method == 'POST':
+
         formset = DependentFormSet(data=request.POST)
+
+
         if formset.is_valid():
             #TODO save dependent data
             return render(request, 'dependents.html', {'formset': formset})
