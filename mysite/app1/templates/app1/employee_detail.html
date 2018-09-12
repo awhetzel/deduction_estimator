@@ -1,4 +1,5 @@
 
+{% extends "base_generic.html" %}
 
 
 {% block content %}
@@ -6,5 +7,23 @@
 <h1>Employee Name: {{employee.first_name}} {{employee.last_name}}</h1>
 <h3>Employee ID: {{employee.id}}</h3>
 <h3>Employee Salary: ${{employee.salary}} </h3>
+
+
+{% if employee.dependent_set.all  %}
+	<h2> Dependents </h2>
+	<ul>
+	{% for d in employee.dependent_set.all  %}
+
+		<li> Name: {{ d }}  </li>
+		<ul>
+			<li>Age: {{ d.age }}</li>
+		</ul>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+
+
+
 {% endblock %}
 

@@ -1,11 +1,11 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-	<h1>Premimum Helper Home</h1>
-	<p>Welcome to Premium Helper, a website developed to make employee benefit
+	<h1>Deduction Helper Home</h1>
+	<p>Welcome to The Deduction Helper, a website developed to make employee benefit
 	calculation simple! To view benefit amounts for an existing employee, or add
 	a new employee, simply login and click the employees button. Having trouble?
-	click help for tips on using this web app.</p>
+	click help at the top of the page for instructions on using this site.</p>
 	{% if user.is_authenticated %}
 		<h2>Welcome {{ user.get_username }} </h2>
 		<p>You have visited this page {{ num_visits }}{% if num_visits == 1 %}

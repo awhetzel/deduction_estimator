@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if failed %}
+
+<p> Your search terms did not match any employees. </p>
+{% else %}
+
+	{% for employee in employee_set %}
+		<ul>
+			<li> <a href="{{ employee.get_absolute_url }}">{{ employee.first_name }}</a> ({{employee.last_name}}) </li>
+		</ul>
+	{% endfor %}
+
+{% endif %}
+{% endblock %}

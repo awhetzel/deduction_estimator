@@ -2,21 +2,19 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<!-- <form method="post" action="" class="pure-form pure-form-aligned">
+ <form method="post" action="" class="pure-form pure-form-aligned">
     {% csrf_token %}
 
-	{{ formset }}
+	{{ dependent_form| crispy }}
 	<input type="submit" value="Submit">
-</form> -->
+</form>
 
+<!--
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
-
 <script type="text/html" id="dependent-template">
 <div id="dependent-__prefix__">
-	{{ formset.empty_form }}
+	{{ formset.empty_form | crispy }}
 </div>
 </script>
 
@@ -26,14 +24,12 @@
 <div id="dependent-form-container">
     {% for form in formset %}
         <div id="formset-{{ forloop.counter0 }}">
-            {{ form.id }}
-            {{ form.as_p }}
+			{% crispy formset %}
 		</div>
-    {% endfor %}
+	{% endfor %}
 </div>
 <a href="#" id="add-dependent-button" class="btn btn-info add-dependent">Add Dependent</a>
 </form>
-
 
 <script>
 $(document).ready(function() {

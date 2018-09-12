@@ -5,7 +5,7 @@
 
 <h1>Add New Employee</h1>
 
-<form method="post" class="pure-form pure-form-aligned" action="{% url 'added' %}">
+<form method="post" class="pure-form pure-form-aligned" action="{% url 'add_new' %}">
     {% csrf_token %}
 	{{ employee_form|crispy }}
     <input type="submit" value="Submit">

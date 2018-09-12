@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h1>Employee List</h1>
@@ -16,7 +17,14 @@
 	<br></br>
 
 	<a href="{% url 'add_new' %}">Click here to add a new employee</a>
+	<br></br>
 
+<form method="post" class="pure-form pure-form-aligned" action="{% url 'employee_search' %}">
+    {% csrf_token %}
+	<input id="full_name" type="text" name="full_name" value="Search By Full Name">
+	<br></br>
+    <input type="submit" value="Search">
+</form>
 
 
 {% endblock %}

@@ -11,8 +11,8 @@ urlpatterns = [
     #path('calculate/', views.calculate, name='calculate'),
     path('calculate/', views.calculate, name='calculate'),
     path('results/', views.results, name='results'),
-    path('added/', views.add_new, name='added'),
-    path('dependents/', views.add_dependents, name='dependents')
-
-
+    path('added/', views.added, name='added'),
+    path('dependents/', views.add_dependents, name='dependents'),
+   # path('confirm_emp/', views.confirm_emp, name='confirm_emp'),
+    path('employee_search/', views.employee_search, name='employee_search'),
 ]

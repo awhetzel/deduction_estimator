@@ -1,9 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.forms import ModelForm
-from django.forms.formsets import formset_factory
-
-#Testing new stuff here!
 
 
 class Company(models.Model):
@@ -21,7 +17,7 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     salary = models.DecimalField(max_digits=9, decimal_places=2)
-    dependents = models.IntegerField()
+    dependents = models.IntegerField(default=0)
 
     def __str__(self):
         return self.first_name+" "+self.last_name
@@ -30,19 +26,12 @@ class Employee(models.Model):
         """Returns the url to access a detail record for this employee."""
         return reverse('employee-detail', args=[str(self.id)])
 
-
-#TODO put this in forms.py
-class EmployeeForm(ModelForm):
-    class Meta:
-        model = Employee
-        fields = ['first_name', 'last_name', 'salary', 'company','dependents']
-
-
-
 class Dependent(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     f_name = models.CharField(max_length=30)
     l_name = models.CharField(max_length=30)
     age = models.IntegerField(default=0)
+    def __str__(self):
+        return self.f_name +' '+ self.l_name
 
 
