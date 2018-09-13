@@ -1,6 +1,6 @@
 
 {% extends "base_generic.html" %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -8,22 +8,50 @@
 <h3>Employee ID: {{employee.id}}</h3>
 <h3>Employee Salary: ${{employee.salary}} </h3>
 
-
 {% if employee.dependent_set.all  %}
-	<h2> Dependents </h2>
+  <h2> Dependents </h2>
 	<ul>
 	{% for d in employee.dependent_set.all  %}
-
-		<li> Name: {{ d }}  </li>
+	  <li> Name: {{ d }}  </li>
 		<ul>
 			<li>Age: {{ d.age }}</li>
 		</ul>
+		<form method="post" class="pure-form pure-form-aligned" action="{% url 'delete_dependent' %}">
+			{% csrf_token %}
+			<button type="submit" value={{ d.pk }} name='delete'>Remove</button>
+		</form>
 	{% endfor %}
 	</ul>
 {% endif %}
 
+<form method="get" class="pure-form pure-form-aligned" action="{% url 'dependents' %}">
+  {% csrf_token %}
+  <button type="submit">Add Dependent</button>
+</form>
 
+<br> </br>
 
+<button onclick="showForm()">Edit Employee</button>
 
+<div id="modify" style="display: none;">
+  <h3> Edit Employee Information </h3>
+	<form method="POST" class="pure-form pure-form-aligned">
+	  {% csrf_token %}
+	  {{ form|crispy  }}
+	  <button type="submit" class="save btn btn-default">Update</button>
+	</form>
+</div>
+
+<script>
+function showForm() {
+    var x = document.getElementById("modify");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+</script>
 {% endblock %}
+
 

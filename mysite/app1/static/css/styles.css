@@ -13,7 +13,7 @@ body {
 	font-size:120%;
 }
 
-/* TOP NAVBAR */
+/* NAVBAR */
 #list1 {
 	background-color: #0000ff;
 	font-size:150%;
@@ -41,6 +41,6 @@ body {
 #list1 ul li a:hover {
 	text-decoration:underline;
 }
-
+/* NAVBAR */
 
 

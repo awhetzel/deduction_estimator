@@ -17,6 +17,12 @@ class EmployeeForm(ModelForm):
         model = Employee
         fields = ['first_name', 'last_name', 'salary']
 
+#Form for modifying employee info
+class EmployeeMod(ModelForm):
+    class Meta:
+        model = Employee
+        fields = ['last_name', 'salary', 'dependents']
+
 
 class DependentForm(ModelForm):
     class Meta:

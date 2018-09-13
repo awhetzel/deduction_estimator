@@ -26,6 +26,11 @@ class Employee(models.Model):
         """Returns the url to access a detail record for this employee."""
         return reverse('employee-detail', args=[str(self.id)])
 
+    class Meta:
+         unique_together = ('first_name', 'last_name',)
+
+
+
 class Dependent(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     f_name = models.CharField(max_length=30)

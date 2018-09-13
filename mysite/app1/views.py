@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from django.http import HttpResponse
 from django.views import generic
 from .models import Employee, Company, Dependent
 from django.shortcuts import get_object_or_404
-from .forms import CalcForm, EmployeeForm, DependentForm, SearchForm
+from .forms import CalcForm, EmployeeForm, DependentForm, SearchForm, EmployeeMod
 from django.forms.models import modelformset_factory
 from django.http import HttpRequest
 from django.db.models import Q
+from django.urls import reverse
+from django.shortcuts import redirect
 #TODO combine imports
 
 #main page: demonstrates basic use of session variables
@@ -45,19 +48,25 @@ def add_new(request):
             temp.company_id = company_id
             temp.save()
             emp_id = temp.pk
-            print('LINE 48')
-            print(emp_id)
-            request.session['recently_added'] = emp_id;
+            request.session['last_accessed'] = emp_id;
             #specify employee string so we can reuse added.html
             type_added = 'Employee'
             context = {
                 'type_added': type_added,
             }
             return render(request, 'added.html', context=context)
+        #If user attempts to add duplicate first and last name
+        else:
+            error_msg = "Error: employee is already in the database"
+            context = {
+                'error_msg': error_msg,
+            }
+            return render(request, 'error.html', context)
     #create blank form
     else:
         employee_form = EmployeeForm()
         return render(request, 'add_new.html', {'employee_form': employee_form})
+
 
 #Allows the user to search for a specific employee
 def employee_search(request):
@@ -91,24 +100,15 @@ def employee_search(request):
 def added(request):
     return render(request, 'added.html')
 
+
 #Allows the user to add depdndents after adding an employee
 #I orginally had some JavaScript and formsets in this function
 #that I thought was really cool, but my wife didn't like it and
 #I decided she was right because users would get frustrated with
 #long formsets, particularly when they make mistakes with entries
 def add_dependents(request):
-    #DependentFormSet = modelformset_factory(Dependent, exclude=(), extra=1)
-    #if request.method == 'POST':
-    #    formset = DependentFormSet(data=request.POST)
-    #    #TODO get employee info from request to populate employee field
-    #    if formset.is_valid():
-    #        #TODO save dependent data
-    #        return render(request, 'dependents.html', {'formset': formset})
-    #else:
-    #    formset = DependentFormSet()
-    #    return render(request, 'dependents.html', {'formset': formset})
     if request.method == 'POST':
-        emp_id = request.session['recently_added']
+        emp_id = request.session['last_accessed']
         dependent_form = DependentForm(request.POST)
         if dependent_form.is_valid():
             temp = dependent_form.save(commit=False)
@@ -120,10 +120,24 @@ def add_dependents(request):
                 'type_added': type_added
             }
             return render(request, 'added.html', context=context)
-
+        #TODO else display error message
     else:
         dependent_form = DependentForm()
         return render(request, 'dependents.html', {'dependent_form': dependent_form})
+
+
+def delete_dependent(request):
+    if request.method == 'POST':
+        dependent = request.POST.get('delete', "")
+        Dependent.objects.filter(pk=dependent).delete()
+        #Build redirect string
+        emp_id = str(request.session['last_accessed'])
+        direct = 'employee/'+emp_id
+
+        return redirect(direct)
+    else:
+        error_msg = "Error: delete failed, it's your fault"
+        return render(request, 'error.html', {'error_msg': error_msg})
 
 
 #Deduction calculator form page
@@ -146,7 +160,7 @@ def results(request):
     discount = float(request.POST['discount'])
     #basic calculation TODO try catch this stuff
     deduction = base_deduct+(dep_deduct*dep)
-    deduction -= (discount*deduction)
+    deduction -= ((discount/100)*deduction)
     #salary after deduction
     after_deduction = float(salary)-deduction
     #context to display on results page
@@ -191,9 +205,36 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
 
 
 #employee details
-class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
+class EmployeeDetailView(FormMixin, LoginRequiredMixin, generic.DetailView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = Employee
+    form_class = EmployeeMod
+
+    def get_success_url(self):
+        return reverse('employee-detail', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        self.request.session['last_accessed'] =self.kwargs['pk']
 
 
+
+        context = super(EmployeeDetailView, self).get_context_data(**kwargs)
+        context['form'] = EmployeeMod(initial={'post': self.object})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        temp = form.save(commit=False)
+        temp.company_id = self.object.company_id
+        temp.pk = self.object.pk
+        temp.first_name = self.object.first_name
+        temp.save()
+        return super(EmployeeDetailView, self).form_valid(form)

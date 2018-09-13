@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<h2> {{ error_msg }} </h2>
+
+<form action="{% url 'add_new' %}">
+  <button type="submit" class="btn btn-xl" style=" border-color: rgb(2,132,69); background-color: rgb(2,132,69); color: rgb(246,246,247); font-family: Verdana;font-size: large">Go Back</button>
+
+</form>
+
+
+{% endblock %}
+
+

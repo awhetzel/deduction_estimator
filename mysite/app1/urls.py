@@ -4,15 +4,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #path('login/', views.login, name='login'),
     path('employee/<int:pk>', views.EmployeeDetailView.as_view(), name='employee-detail'),
     path('employees/', views.EmployeeListView.as_view(), name='employees'),
     path('add_new/', views.add_new, name='add_new'),
-    #path('calculate/', views.calculate, name='calculate'),
     path('calculate/', views.calculate, name='calculate'),
     path('results/', views.results, name='results'),
     path('added/', views.added, name='added'),
     path('dependents/', views.add_dependents, name='dependents'),
-   # path('confirm_emp/', views.confirm_emp, name='confirm_emp'),
     path('employee_search/', views.employee_search, name='employee_search'),
+    path('delete_dependent', views.delete_dependent, name='delete_dependent'),
 ]
