@@ -12,5 +12,6 @@ urlpatterns = [
     path('added/', views.added, name='added'),
     path('dependents/', views.add_dependents, name='dependents'),
     path('employee_search/', views.employee_search, name='employee_search'),
-    path('delete_dependent', views.delete_dependent, name='delete_dependent'),
+    path('delete_dependent/', views.delete_dependent, name='delete_dependent'),
+    path('help/', views.help, name='help'),
 ]

@@ -1,41 +1,64 @@
 
-html {
-	height: 100%;
-}
-
+/* TODO still messed up when resized...*/
 body {
-    height:100%;
-    min-height: 100%;
+	margin-top:0;
+	/*height:100%;
+    min-height: 100%;*/
     background: #6699ff;
-    color: #000000;
+	/*background-image: radial-gradient(#537979, #95b7b7);*/
+	background-image: url(../images/pexels-photo-220182.jpeg);
+	color: #000000;
     position:relative;
 	text-align: center;
 	font-size:120%;
 }
 
+.title h1 {
+	margin-top: 0;
+	margin-bottom: 8px;
+	text-decoration: underline overline solid black;
+	color: black;
+}
+
+.title img {
+
+	float:left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
 /* NAVBAR */
 #list1 {
-	background-color: #0000ff;
+	margin-top: 0;
+	height: 150px;
+	width: 100%;
+	background-color: #336699;
+	background-image: url(../images/pexels-photo-242236.jpeg);
 	font-size:150%;
+	border-bottom:1px solid #eee;
+
 }
 #list1 ul {
+	margin-top: 0;
+	margin-bottom:0;
 	list-style:none;
 	text-align:center;
-	border-top:1px solid #eee;
-	border-bottom:1px solid #eee;
-	padding:10px 0; height:75px;
+/*	border-bottom:1px solid #eee;
+	padding:10px 0;
+	height:85px; */
 }
 
 #list1 ul li {
 	display:inline;
 	text-transform:uppercase;
-	padding:0 20px;
+	padding: 0 40px;
 	letter-spacing:10px;
 }
 
 #list1 ul li a {
 	text-decoration:none;
-	color:#eee;
+	color: black;
+
 }
 
 #list1 ul li a:hover {
@@ -43,4 +66,58 @@ body {
 }
 /* NAVBAR */
 
+/*FOOTER*/
+#footer {
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+	background-image: url(../images/pexels-photo-242236.jpeg);
+	/*position: fixed;*/
+	left: 0;
+    bottom: 0;
+    width: 100%;
+    /*background-color: #336699;*/
+    color: black;
+    text-align: center;
+	height: 7%;
+}
 
+#footer p {
+	margin-bottom: 0;
+}
+
+table {
+	width:70%;
+    margin-left:15%;
+    margin-right:15%;
+	/*background-color: #336699;*/
+	/*	background-image: url(../images/pexels-photo-242236.jpeg);*/
+	background:rgba(255,255,255,0.3);
+	border: 1px solid black;
+}
+
+td:nth-child(1), th:nth-child(1) {
+	text-align: left;
+}
+
+td:nth-child(2), th:nth-child(2) {
+	text-align: right;
+}
+
+#detail_button {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+/*above footer*/
+#clear { height: 500px;}
+
+.container-fluid {
+  background:rgba(255,255,255,0.5);
+  margin-top: 100px;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+#help_text {
+	text-align: left;
+}
