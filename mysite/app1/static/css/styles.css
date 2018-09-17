@@ -91,6 +91,11 @@ td:nth-child(2), th:nth-child(2) {
 	margin-bottom: 30px;
 }
 
+/*make delete buttons scary!*/
+#delete {
+	color:red;
+}
+
 /*text on help page*/
 #help_text {
 	text-align: left;

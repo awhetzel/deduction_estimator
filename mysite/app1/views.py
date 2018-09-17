@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.urls import reverse
 from decimal import Decimal
 import locale
+from django.http import HttpResponseRedirect
 
 #set locale for currency formatting
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
@@ -66,6 +67,18 @@ def add_new(request):
     else:
         employee_form = EmployeeForm()
         return render(request, 'add_new.html', {'employee_form': employee_form})
+
+
+#Allow users to remove employees
+def remove_employee(request):
+    if request.method == 'POST':
+        emp_id = request.POST.get('delete', "")
+        Employee.objects.filter(pk=emp_id).delete()
+        return HttpResponseRedirect(reverse('employees'))
+    else:
+        #This shouldn't happen, I had to try to be funny somewhere
+        error_msg = "Error: delete failed, it's your fault"
+        return render(request, 'error.html', {'error_msg': error_msg})
 
 
 #Helper error message function used by multiple views
@@ -141,6 +154,7 @@ def add_dependents(request):
         }
         return render(request, 'dependents.html', context=context)
 
+
 #Allows users to delete dependents
 @login_required
 def delete_dependent(request):
@@ -154,6 +168,7 @@ def delete_dependent(request):
 
         return redirect( url)
     else:
+        #This shouldn't happen, I had to try to be funny somewhere
         error_msg = "Error: delete failed, it's your fault"
         return render(request, 'error.html', {'error_msg': error_msg})
 

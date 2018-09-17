@@ -9,12 +9,19 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Details</th>
+    <th>Remove</th>
     {% for employee in employee_list %}
       <tr>
         <td>{{employee.first_name.capitalize}}</td>
         <td>{{employee.last_name.capitalize}}</td>
         <td>
           <a href="{{ employee.get_absolute_url }}"><button>Details</button></a>
+        </td>
+        <td>
+          <form method="post" class="pure-form pure-form-aligned" id='delete' action="{% url 'remove_employee' %}">
+			      {% csrf_token %}
+			      <button type="submit" value={{ employee.pk }} name='delete' onclick="return confirm('Are you sure?')">Remove</button>
+		      </form>
         </td>
       </tr>
     {% endfor %}

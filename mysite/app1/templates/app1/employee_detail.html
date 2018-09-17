@@ -70,7 +70,7 @@
         <td>
 		      <form method="post" class="pure-form pure-form-aligned" action="{% url 'delete_dependent' %}">
 			      {% csrf_token %}
-			      <button type="submit" value={{ d.pk }} name='delete'>Remove</button>
+			      <button type="submit" id='delete' value={{ d.pk }} name='delete' onclick="return confirm('Are you sure?')">Remove</button>
 		      </form>
         </td>
       </tr>
