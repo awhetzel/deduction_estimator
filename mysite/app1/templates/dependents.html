@@ -4,12 +4,12 @@
 
 <h2> Add Dependent For {{ employee.first_name.capitalize }}
 {{ employee.last_name.capitalize }} </h2>
- <form method="post" action="" class="pure-form pure-form-aligned">
-    {% csrf_token %}
+<form method="post" action="" class="pure-form pure-form-aligned">
+  {% csrf_token %}
 	{{ dependent_form| crispy }}
 	<input type="submit" value="Submit">
 </form>
 
 {% endblock %}
-<!-- ex: set tabstop=2 expandtab: -->
+
 

@@ -12,17 +12,13 @@
 	<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
 
 <div id="list1">
-
-    <div class="title">
-
-        <a href="{% url 'index' %}">
-             <h1>Deduction Estimator</h1>
-
-        </a>
-           </div>
-
+  <div class="title">
+    <a href="{% url 'index' %}">
+      <h1>Deduction Estimator</h1>
+    </a>
+  </div>
     <ul>
-    <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'index' %}">Home</a></li>
 			<li><a href="{% url 'calculate' %}">Calculate</a></li>
 			{% if user.is_authenticated %}
 				<li><a href="{% url 'employees' %}">Employees</a></li>
@@ -32,7 +28,7 @@
 			{% endif %}
       <li><a href="{% url 'help' %}">Help</a></li>
 		</ul>
-	</div>
+</div>
 </head>
 
 <body>
@@ -68,7 +64,4 @@
 </div>
 </html>
 
-
-
-
-<!-- ex: set tabstop=2 expandtab: -->
+<!-- vim: set tabstop=2 expandtab: -->

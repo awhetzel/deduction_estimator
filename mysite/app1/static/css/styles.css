@@ -1,18 +1,4 @@
-
-/* TODO still messed up when resized...*/
-body {
-	margin-top:0;
-	/*height:100%;
-    min-height: 100%;*/
-    background: #6699ff;
-	/*background-image: radial-gradient(#537979, #95b7b7);*/
-	background-image: url(../images/pexels-photo-220182.jpeg);
-	color: #000000;
-    position:relative;
-	text-align: center;
-	font-size:120%;
-}
-
+/* TOP LOGO/LINK */
 .title h1 {
 	margin-top: 0;
 	margin-bottom: 8px;
@@ -21,31 +7,27 @@ body {
 }
 
 .title img {
-
 	float:left;
 	margin-top: 10px;
 	margin-left: 10px;
 }
+/* TOP LOGO/LINK */
 
 /* NAVBAR */
 #list1 {
 	margin-top: 0;
 	height: 150px;
 	width: 100%;
-	background-color: #336699;
-	background-image: url(../images/pexels-photo-242236.jpeg);
+	background-image: linear-gradient(#002966, grey);
 	font-size:150%;
-	border-bottom:1px solid #eee;
-
+	border-bottom:1px solid #000;
 }
+
 #list1 ul {
 	margin-top: 0;
 	margin-bottom:0;
 	list-style:none;
 	text-align:center;
-/*	border-bottom:1px solid #eee;
-	padding:10px 0;
-	height:85px; */
 }
 
 #list1 ul li {
@@ -66,31 +48,31 @@ body {
 }
 /* NAVBAR */
 
-/*FOOTER*/
-#footer {
-	border-top:1px solid #eee;
-	border-bottom:1px solid #eee;
-	background-image: url(../images/pexels-photo-242236.jpeg);
-	/*position: fixed;*/
-	left: 0;
-    bottom: 0;
-    width: 100%;
-    /*background-color: #336699;*/
-    color: black;
-    text-align: center;
-	height: 7%;
+/*BODY*/
+body {
+	margin-top:0;
+    background: #6699ff;
+	background-image: url(../images/squares.jpeg);
+	background-size: cover;
+	color: #000000;
+    position:relative;
+	text-align: center;
+	font-size:120%;
 }
 
-#footer p {
-	margin-bottom: 0;
+/*Body content*/
+.container-fluid {
+  background:rgba(142, 162,209,0.5);
+  margin-top: 100px;
+  padding-top: 2%;
+  padding-bottom: 3%;
 }
 
+/*Body tables*/
 table {
 	width:70%;
     margin-left:15%;
     margin-right:15%;
-	/*background-color: #336699;*/
-	/*	background-image: url(../images/pexels-photo-242236.jpeg);*/
 	background:rgba(255,255,255,0.3);
 	border: 1px solid black;
 }
@@ -103,21 +85,48 @@ td:nth-child(2), th:nth-child(2) {
 	text-align: right;
 }
 
+/*buttons in employee-detail*/
 #detail_button {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
 
-/*above footer*/
-#clear { height: 500px;}
-
-.container-fluid {
-  background:rgba(255,255,255,0.5);
-  margin-top: 100px;
-  padding-top: 2%;
-  padding-bottom: 3%;
-}
-
+/*text on help page*/
 #help_text {
 	text-align: left;
 }
+
+/*Above footer, this feels
+ * hacky, but it works to
+ * keep the body content
+ * from hiding behind the
+ * footer */
+#clear { height: 500px;}
+
+/*BODY*/
+
+/*FOOTER*/
+#footer {
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	background-image: linear-gradient(grey, #002966);
+
+	left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+	padding-top: 30px;
+}
+
+#footer p {
+	margin-bottom: 30px;
+	font-size: 150%;
+}
+/*FOOTER*/
+
+
+
+
+
+

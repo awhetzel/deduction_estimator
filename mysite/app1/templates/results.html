@@ -3,10 +3,34 @@
 {% block content %}
 <h1>Estimated Values For Employee:</h1>
 
-<h3> Salary: {{ salary }}</h3>
-<h3> Dependents: {{ dep }}</h3>
-<h3> Deduction Amount: {{deduction}}</h3>
-<h3> Salary After Deduction: {{ after_deduction }} </h3>
-<h3> Company Cost: {{ company_pays }} </h3>
+<table class='pure-table pure-table-horizontal'>
+  <th> Description</th>
+  <th> Value</th>
+
+  <tr>
+	<td>Salary:</td>
+	<td>{{ salary }}</td>
+  </tr>
+
+  <tr>
+	<td>Dependents:</td>
+	<td>{{ dep }} </td>
+  </tr>
+
+  <tr>
+	<td>Deduction Amount:</td>
+	<td>{{deduction}} </td>
+  </tr>
+
+  <tr>
+	<td>Salary After Deduction:</td>
+	<td>{{ after_deduction }} </td>
+  </tr>
+
+  <tr>
+	<td>Company Cost: </td>
+	<td>{{ company_pays }} </td>
+  </tr>
+</table>
 
 {% endblock %}

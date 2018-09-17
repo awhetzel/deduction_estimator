@@ -5,46 +5,45 @@
 
 <h1> Details for Employee: {{employee.first_name.capitalize}} {{employee.last_name.capitalize}}</h1>
 <table  class= 'pure-table pure-table-horizontal'>
-    <th> Description</th>
-    <th> Result </th>
-
-    <tbody>
+  <th> Description</th>
+  <th> Result </th>
+  <tbody>
     <tr>
-        <td> Employee Name: </td>
-        <td> {{employee.first_name.capitalize}} {{employee.last_name.capitalize}} </td>
+      <td> Employee Name: </td>
+      <td> {{employee.first_name.capitalize}} {{employee.last_name.capitalize}} </td>
     </tr>
 
     <tr>
-        <td> Employee ID: </td>
-        <td> {{employee.id}} </td>
+      <td> Employee ID: </td>
+      <td> {{employee.id}} </td>
     </tr>
 
     <tr>
-        <td> Employee Salary: </td>
-        <td> {{salary}} </td>
-    </tr>
-
-        <tr>
-        <td> Total Benefit Cost: </td>
-        <td> {{total_cost}} </td>
+      <td> Employee Salary: </td>
+      <td> {{salary}} </td>
     </tr>
 
     <tr>
-        <td> Employee Annual Deduction: </td>
-        <td> {{deduction}} </td>
+      <td> Total Benefit Cost: </td>
+      <td> {{total_cost}} </td>
     </tr>
 
     <tr>
-        <td> Deduction Per Paycheck: </td>
-        <td> {{check_deduction}} </td>
+      <td> Employee Annual Deduction: </td>
+      <td> {{deduction}} </td>
+    </tr>
+
+    <tr>
+      <td> Deduction Per Paycheck: </td>
+      <td> {{check_deduction}} </td>
     </tr>
 
      <tr>
-        <td> Employer Cost: </td>
-        <td> {{employer_cost}} </td>
+      <td> Employer Cost: </td>
+      <td> {{employer_cost}} </td>
     </tr>
 
-    </tbody>
+  </tbody>
 </table>
 
 <button onclick="showForm()" class = "pure-button" id="detail_button" >Edit Employee</button>
@@ -61,20 +60,20 @@
 {% if employee.dependent_set.all  %}
   <h1> Dependents </h1>
   <table class='pure-table pure-table-horizontal'>
-      <th> Name</th>
-      <th> Birth Date </th>
-      <th> Remove </th>
+    <th> Name</th>
+    <th> Birth Date </th>
+    <th> Remove </th>
     {% for d in employee.dependent_set.all  %}
-	      <tr>
-            <td> Name: {{ d }}  </td>
-		        <td>Birth Date: {{ d.birth_date }}</td>
-            <td>
-		            <form method="post" class="pure-form pure-form-aligned" action="{% url 'delete_dependent' %}">
-			              {% csrf_token %}
-			              <button type="submit" value={{ d.pk }} name='delete'>Remove</button>
-		            </form>
-            </td>
-        </tr>
+	    <tr>
+        <td> Name: {{ d }}  </td>
+		    <td>Birth Date: {{ d.birth_date }}</td>
+        <td>
+		      <form method="post" class="pure-form pure-form-aligned" action="{% url 'delete_dependent' %}">
+			      {% csrf_token %}
+			      <button type="submit" value={{ d.pk }} name='delete'>Remove</button>
+		      </form>
+        </td>
+      </tr>
     {% endfor %}
   </table>
 {% endif %}

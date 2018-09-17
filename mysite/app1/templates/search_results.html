@@ -3,25 +3,22 @@
 {% block content %}
 
 {% if failed %}
-
-<p> Your search terms did not match any employees. </p>
+  <p> Your search terms did not match any employees. </p>
 {% else %}
-
-	 <table class='pure-table pure-table-horizontal'>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Details</th>
-            {% for employee in employee_set %}
-                <tr>
-                    <td>{{employee.first_name}}</td>
-                    <td>{{employee.last_name}}</td>
-                    <td>
-                        <a href="{{ employee.get_absolute_url }}"><button>Details</button></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-
-
+  <table class='pure-table pure-table-horizontal'>
+	<th>First Name</th>
+    <th>Last Name</th>
+    <th>Details</th>
+    {% for employee in employee_set %}
+	  <tr>
+		<td>{{employee.first_name}}</td>
+		<td>{{employee.last_name}}</td>
+		<td>
+		  <a href="{{ employee.get_absolute_url }}"><button>Details</button></a>
+		</td>
+	  </tr>
+    {% endfor %}
+  </table>
 {% endif %}
+
 {% endblock %}

@@ -3,12 +3,10 @@
 
 {% block content %}
 <form method="post" class="pure-form pure-form-aligned" action="{% url 'results' %}">
-    {% csrf_token %}
-	{{ calc_form|crispy }}
-    <input type="submit" value="Submit">
+  {% csrf_token %}
+  {{ calc_form|crispy }}
+  <input type="submit" value="Submit">
 </form>
-
-
 {% endblock %}
 
 

@@ -2,35 +2,37 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
 <h1>Employees </h1>
-    {% if employee_list %}
-        <table class='pure-table pure-table-horizontal'>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Details</th>
-            {% for employee in employee_list %}
-                <tr>
-                    <td>{{employee.first_name.capitalize}}</td>
-                    <td>{{employee.last_name.capitalize}}</td>
-                    <td>
-                        <a href="{{ employee.get_absolute_url }}"><button>Details</button></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>There are no Employees in the database.</p>
-    {% endif %}
-	<br></br>
-  <a href="{% url 'add_new' %}"><button class = "pure-button">Add New Employee</button></a>
-	<br></br>
-  <p><strong>Search Employees by Name</strong></p>
+{% if employee_list %}
+  <table class='pure-table pure-table-horizontal'>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Details</th>
+    {% for employee in employee_list %}
+      <tr>
+        <td>{{employee.first_name.capitalize}}</td>
+        <td>{{employee.last_name.capitalize}}</td>
+        <td>
+          <a href="{{ employee.get_absolute_url }}"><button>Details</button></a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>There are no Employees in the database.</p>
+{% endif %}
+<br></br>
+<a href="{% url 'add_new' %}"><button class = "pure-button">Add New Employee</button></a>
+<br></br>
+<p><strong>Search Employees by Name</strong></p>
 <form method="post" class="pure-form pure-form-aligned" action="{% url 'employee_search' %}">
-    {% csrf_token %}
-	  <input id="full_name" type="text" name="full_name">
-	  <br></br>
-    <input type="submit" value="Search">
+  {% csrf_token %}
+	<input id="full_name" type="text" name="full_name">
+	<br></br>
+  <input type="submit" value="Search">
 </form>
+
 {% endblock %}
 <!-- ex: set tabstop=2 expandtab: -->
 
