@@ -20,6 +20,7 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
+
 class Employee(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
@@ -35,6 +36,7 @@ class Employee(models.Model):
 
     class Meta:
          unique_together = ('first_name', 'last_name',)
+
 
 class Dependent(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)

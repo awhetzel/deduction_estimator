@@ -4,6 +4,7 @@
 {% block content %}
 
 <h1> Details for Employee: {{employee.first_name.capitalize}} {{employee.last_name.capitalize}}</h1>
+<h2> Company: {{company_name}}</h2>
 <table  class= 'pure-table pure-table-horizontal'>
   <th> Description</th>
   <th> Result </th>
@@ -39,7 +40,7 @@
     </tr>
 
      <tr>
-      <td> Employer Cost: </td>
+      <td> Employer Annual Cost: </td>
       <td> {{employer_cost}} </td>
     </tr>
 

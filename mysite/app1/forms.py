@@ -1,6 +1,5 @@
 from django import forms
 from .models import Company, Employee, Dependent
-from django.forms.models import modelformset_factory
 from django.forms import ModelForm
 
 #Form for quick calculation
@@ -26,11 +25,13 @@ class EmployeeForm(ModelForm):
         }
         fields = ['first_name', 'last_name', 'salary']
 
+
 #Form for modifying employee info
 class EmployeeMod(ModelForm):
     class Meta:
         model = Employee
         fields = ['last_name', 'salary']
+
 
 #Add dependents
 class DependentForm(ModelForm):
@@ -42,6 +43,7 @@ class DependentForm(ModelForm):
             'birth_date': 'Birth Date (mm/dd/yyyy)',
         }
         fields = ['f_name', 'l_name', 'birth_date']
+
 
 #Search database for employee
 class SearchForm(forms.Form):

@@ -16,13 +16,12 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 #Home page
 def index(request):
-    # Number of visits to this view, as counted in the session variable.
+    #Demo basic use of session variable.
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
     context = {
         'num_visits': num_visits,
     }
-    # Render the HTML template index.html with the data in the context variable.
     return render(request, 'index.html', context=context)
 
 
@@ -101,7 +100,7 @@ def employee_search(request):
         f_name = full_name[0]
         l_name = full_name[1]
         #Checks the first two keywords against first and
-        #last names in the database ignores any subsequent keywords
+        #last names in the database ignores any subsequent input
         employee_set = Employee.objects.filter(Q(first_name__icontains = f_name) | Q(last_name__icontains = l_name)
         |Q(first_name__icontains = l_name) | Q(last_name__icontains = f_name))
     #If only first or last name was entered, we will list any matches to either
@@ -110,7 +109,7 @@ def employee_search(request):
         employee_set = Employee.objects.filter( Q(first_name__icontains = f_name) | Q(last_name__icontains = f_name))
     #If filter failed
     if employee_set is None or len(employee_set) ==0:
-            failed = True
+        failed = True
     context = {
             'failed': failed,
             'employee_set': employee_set,
@@ -242,8 +241,9 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
     model = Employee
     #this forces pagination, 10 employees per page
     paginate_by = 10
-    def get_queryset(self):
 
+
+    def get_queryset(self):
         #filter employees that belong to same company as user
         groups = self.request.user.groups.all()
 
@@ -290,12 +290,14 @@ class EmployeeDetailView(FormMixin, LoginRequiredMixin, generic.DetailView):
         #Employer cost
         employer_cost = self.get_company_cost(total_cost, company)
         #Set context variables
+        context['company_name'] = company.company_name
         context['form'] = EmployeeMod(initial={'post': self.object})
         context['deduction'] = locale.currency(deduction, grouping=True)
         context['check_deduction'] = locale.currency((deduction/26), grouping=True)
         context['total_cost'] = locale.currency(total_cost, grouping=True)
         context['employer_cost'] = locale.currency(employer_cost, grouping=True)
         context['salary'] = locale.currency(self.object.salary, grouping=True)
+
         return context
 
 

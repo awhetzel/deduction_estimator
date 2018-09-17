@@ -10,7 +10,10 @@ benefit packages.
 ## Downloading and Running the Application
 
 The following instructions are for linux systems and they assume you
-have Git and Python installed.
+have Git and Python installed. This process will also work in the
+Ubuntu shell for Windows 10. These instructions encourage the use of
+a virtual environment (python-venv) that provides python-pip to make
+the installation and use of dependencies fairly painless.
 
 * Clone the repository from github:
 
@@ -67,7 +70,7 @@ modified via the admin site that is bundled with the Django framework.The
 admin site can be found at http://127.0.0.1:8000/admin
 
 Usage of the application is pretty straightforward, but I included a 'help'
-page that explains how to use the application.
+page that provides instructions on how to use all of the features.
 
 
 ## Testing
@@ -76,11 +79,17 @@ with it, and manually testing myself. I was interested in the Django
 testing tutorials, but this was a time sensitive learning exercise so I
 didn't do any TDD or automated testing.
 
-Currently, the application has only been tested on Fedora 28 with firefox
-and konqueror, I plan to test with chrome, Fedora 26, and Windows, I will
-update this document when I test on other operating systems and browsers.
+This application has been tested on Fedora 26, Fedora 28, and Windows 10
+using the Unbuntu shell for windows. It has been tested and is compatible
+with Firefox, Google Chrome, Microsoft Edge, and Konqueror browsers.
 
 ### Known Bugs
-There are currently no known bugs in the project.
+The only way I have been able to break the application is to login to the
+site as the admin user and attempt to add an employee. This will return an
+internal server error because the admin user is not a member of any company
+group. I found this issue late in the development process and I was not
+very concerned about it because the admin user has access to the admin site
+if it was necessary for the admin to add employees. The admin can also create
+users for any company via the admin site.
 
 
