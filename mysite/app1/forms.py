@@ -9,7 +9,7 @@ class CalcForm(forms.Form):
     dependents = forms.CharField(label='Number of Dependents')
     dependent_deduction = forms.CharField(label= 'Dependent Cost')
     discount = forms.CharField(label='Discount Percentage')
-    num_eligible = forms.CharField(label ='#Dependents eligible for discount')
+    num_eligible = forms.CharField(label ='Discount eligible dependents')
     co_pays = forms.CharField(label ='Percentage Paid by Employer')
     emp_eligible = forms.BooleanField(label= 'Employee eligible for discount?', required=False)
 
