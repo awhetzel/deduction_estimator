@@ -2,8 +2,10 @@ from django.db import models
 from django.urls import reverse
 from datetime import datetime
 from decimal import Decimal
+from django.conf import settings
 
 class Company(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     base_salary = models.DecimalField(max_digits=9, decimal_places=2)
     #Standard deduction for employees
     emp_deduct = models.DecimalField(max_digits=6, decimal_places=2)

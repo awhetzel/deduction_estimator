@@ -35,11 +35,16 @@ def login(request):
 def add_new(request):
     #if POST request, process input
     if request.method == 'POST':
-        #get user company to populate employee company
-        groups = request.user.groups.all()
-        company = groups.last()
-        company_obj = Company.objects.get(company_name=company)
-        company_id = company_obj.pk
+        ##get user company to populate employee company
+        user = request.user
+        company_query = Company.objects.filter(user = user.id)
+        #if user doesn't belong to a company
+        if not company_query:
+            error_msg = "Error: you don't belong to a company"
+            target = 'employees'
+            return error_page(request, error_msg, target)
+        #get company id
+        company_id = company_query[0].pk
         #get form input
         employee_form = EmployeeForm(request.POST)
         #validate form input
@@ -242,24 +247,14 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
     #this forces pagination, 10 employees per page
     paginate_by = 10
 
-
     def get_queryset(self):
-        #filter employees that belong to same company as user
-        groups = self.request.user.groups.all()
-
-        if groups:
-            #get the company name, this will be the last (2nd)
-            #element in the queryset because every user is a
-            #member of 'employer' and their own company groups
-            co_name = groups.last()
-            #get the company object in a queryset
-            company_set = Company.objects.filter(company_name__icontains =co_name)
-            #only one object in queryset
-            co = company_set[0]
-            #get the primary key
-            co_id = co.pk
-            #return employees that belong to this company
-            return Employee.objects.filter(company=co_id)
+        #get logged in user
+        user = self.request.user
+        #get company with fk reference to this user
+        company_query = Company.objects.filter(user = user.id)
+        #If this user belongs to a company
+        if company_query:
+            return Employee.objects.filter(company=company_query[0])
         else:
             return Employee.objects.all()
 
@@ -290,6 +285,7 @@ class EmployeeDetailView(FormMixin, LoginRequiredMixin, generic.DetailView):
         #Employer cost
         employer_cost = self.get_company_cost(total_cost, company)
         #Set context variables
+        context['company_percent'] = company.contribution_percent
         context['company_name'] = company.company_name
         context['form'] = EmployeeMod(initial={'post': self.object})
         context['deduction'] = locale.currency(deduction, grouping=True)
