@@ -84,12 +84,7 @@ using the Unbuntu shell for windows. It has been tested and is compatible
 with Firefox, Google Chrome, Microsoft Edge, and Konqueror browsers.
 
 ### Known Bugs
-The only way I have been able to break the application is to login to the
-site as the admin user and attempt to add an employee. This will return an
-internal server error because the admin user is not a member of any company
-group. I found this issue late in the development process and I was not
-very concerned about it because the admin user has access to the admin site
-if it was necessary for the admin to add employees. The admin can also create
-users for any company via the admin site.
+There are currently no known bugs, though testing has been limited
+
 
 
